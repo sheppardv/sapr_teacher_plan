@@ -5,35 +5,35 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+    <?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id' => $data->id)); ?>
+    <br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_id); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
+    <?php echo CHtml::encode($data->user_id); ?>
+    <br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('numberSemestr')); ?>:</b>
-	<?php echo CHtml::encode($data->numberSemestr); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('numberSemestr')); ?>:</b>
+    <?php echo CHtml::encode($data->numberSemestr); ?>
+    <br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('subject_id')); ?>:</b>
-	<?php echo CHtml::encode($data->subject_id); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('subject_id')); ?>:</b>
+    <?php echo CHtml::encode($data->subject_id); ?>
+    <br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('speciality_id')); ?>:</b>
-	<?php echo CHtml::encode($data->speciality_id); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('speciality_id')); ?>:</b>
+    <?php echo CHtml::encode($data->speciality_id); ?>
+    <br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('numberSemester')); ?>:</b>
-	<?php echo CHtml::encode($data->numberSemester); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('numberSemester')); ?>:</b>
+    <?php echo CHtml::encode($data->numberSemester); ?>
+    <br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('countLecture')); ?>:</b>
-	<?php echo CHtml::encode($data->countLecture); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('countLecture')); ?>:</b>
+    <?php echo CHtml::encode($data->countLecture); ?>
+    <br/>
 
-	<?php /*
+    <?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('countPractic')); ?>:</b>
 	<?php echo CHtml::encode($data->countPractic); ?>
 	<br />
@@ -94,6 +94,7 @@
 	<?php echo CHtml::encode($data->created_at); ?>
 	<br />
 
-	*/ ?>
+	*/
+    ?>
 
 </div>
