@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'teacherReport':
  * @property integer $id
- * @property integer $teacher_id
+ * @property integer $user_id
  * @property integer $subject_id
  * @property string $dateReport
  * @property string $dateActivity
@@ -36,14 +36,14 @@ class TeacherReport extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('teacher_id, subject_id', 'required'),
-			array('teacher_id, subject_id, countHours', 'numerical', 'integerOnly'=>true),
+			array('user_id, subject_id', 'required'),
+			array('user_id, subject_id, countHours', 'numerical', 'integerOnly'=>true),
 			array('topicActivity', 'length', 'max'=>255),
 			array('typeActivity', 'length', 'max'=>45),
 			array('dateReport, dateActivity, changed_at, created_at', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, teacher_id, subject_id, dateReport, dateActivity, topicActivity, typeActivity, countHours, changed_at, created_at', 'safe', 'on'=>'search'),
+			array('id, user_id, subject_id, dateReport, dateActivity, topicActivity, typeActivity, countHours, changed_at, created_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,9 +55,19 @@ class TeacherReport extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'teacher' => array(self::BELONGS_TO, 'Teacher', 'teacher_id'),
+			'teacher' => array(self::BELONGS_TO, 'Teacher', 'user_id'),
 		);
 	}
+
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'created_at',
+                'updateAttribute' => 'changed_at',
+            )
+        );
+    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -66,7 +76,7 @@ class TeacherReport extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'teacher_id' => 'Teacher',
+			'user_id' => 'Teacher',
 			'subject_id' => 'Subject',
 			'dateReport' => 'Date Report',
 			'dateActivity' => 'Date Activity',
@@ -97,7 +107,7 @@ class TeacherReport extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('teacher_id',$this->teacher_id);
+		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('subject_id',$this->subject_id);
 		$criteria->compare('dateReport',$this->dateReport,true);
 		$criteria->compare('dateActivity',$this->dateActivity,true);

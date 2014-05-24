@@ -49,6 +49,16 @@ class Speciality extends CActiveRecord
 		);
 	}
 
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'created_at',
+                'updateAttribute' => 'changed_at',
+            )
+        );
+    }
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

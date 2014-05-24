@@ -49,9 +49,19 @@ class Teacher extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'teacherReports' => array(self::HAS_MANY, 'TeacherReport', 'teacher_id'),
+			'teacherReports' => array(self::HAS_MANY, 'TeacherReport', 'user_id'),
 		);
 	}
+
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'created_at',
+                'updateAttribute' => 'changed_at',
+            )
+        );
+    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)

@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'teacherPlan':
  * @property integer $id
- * @property integer $teacher_id
+ * @property integer $user_id
  * @property integer $numberSemestr
  * @property integer $subject_id
  * @property integer $speciality_id
@@ -45,12 +45,12 @@ class TeacherPlan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('teacher_id, subject_id, speciality_id, numberSemester', 'required'),
-			array('teacher_id, numberSemestr, subject_id, speciality_id, numberSemester, countLecture, countPractic, countLab, countConsultation, countDiploma, countCoursework, countZalick, countExams, countModulework, countPostgraduate, countPracticeLead, countControlWork, countCalculateWork, countDEK', 'numerical', 'integerOnly'=>true),
+			array('user_id, subject_id, speciality_id, numberSemester', 'required'),
+			array('user_id, numberSemestr, subject_id, speciality_id, numberSemester, countLecture, countPractic, countLab, countConsultation, countDiploma, countCoursework, countZalick, countExams, countModulework, countPostgraduate, countPracticeLead, countControlWork, countCalculateWork, countDEK', 'numerical', 'integerOnly'=>true),
 			array('changed_at, created_at', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, teacher_id, numberSemestr, subject_id, speciality_id, numberSemester, countLecture, countPractic, countLab, countConsultation, countDiploma, countCoursework, countZalick, countExams, countModulework, countPostgraduate, countPracticeLead, countControlWork, countCalculateWork, countDEK, changed_at, created_at', 'safe', 'on'=>'search'),
+			array('id, user_id, numberSemestr, subject_id, speciality_id, numberSemester, countLecture, countPractic, countLab, countConsultation, countDiploma, countCoursework, countZalick, countExams, countModulework, countPostgraduate, countPracticeLead, countControlWork, countCalculateWork, countDEK, changed_at, created_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +65,16 @@ class TeacherPlan extends CActiveRecord
 		);
 	}
 
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'created_at',
+                'updateAttribute' => 'changed_at',
+            )
+        );
+    }
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -72,7 +82,7 @@ class TeacherPlan extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'teacher_id' => 'Teacher',
+			'user_id' => 'Teacher',
 			'numberSemestr' => 'Number Semestr',
 			'subject_id' => 'Subject',
 			'speciality_id' => 'Speciality',
@@ -115,7 +125,7 @@ class TeacherPlan extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('teacher_id',$this->teacher_id);
+		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('numberSemestr',$this->numberSemestr);
 		$criteria->compare('subject_id',$this->subject_id);
 		$criteria->compare('speciality_id',$this->speciality_id);

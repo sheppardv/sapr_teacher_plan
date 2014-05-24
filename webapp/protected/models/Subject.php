@@ -27,6 +27,7 @@ class Subject extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('name', 'unique'),
 			array('name', 'length', 'max'=>255),
 			array('created_at, changed_at', 'safe'),
 			// The following rule is used by search().
@@ -45,6 +46,16 @@ class Subject extends CActiveRecord
 		return array(
 		);
 	}
+
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'created_at',
+                'updateAttribute' => 'changed_at',
+            )
+        );
+    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)

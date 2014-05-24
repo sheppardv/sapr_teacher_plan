@@ -26,15 +26,20 @@ return array(
             'ipFilters' => array('127.0.0.1', '10.*.*.*'),
         ),
 
-        'admin',
+        'admin' => [
+            'layoutPath' => 'protected/modules/admin/views/layouts',
+        ],
 
     ),
 
     // application components
     'components' => array(
         'user' => array(
-            // enable cookie-based authentication
+            'class' => 'WebUser',
             'allowAutoLogin' => true,
+        ),
+        'session' => array(
+            'autoStart' => true,
         ),
         // uncomment the following to enable URLs in path-format
 

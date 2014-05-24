@@ -46,6 +46,16 @@ class SiteController extends Controller
 		}
 	}
 
+    public function actionIsGuest(){
+        if(Yii::app()->user->isGuest) {
+            print("Not logged");
+        } else {
+            print_r(Yii::app()->user);
+            print("Your id is ".Yii::app()->user->id);
+
+        }
+    }
+
 	/**
 	 * Displays the contact page
 	 */
