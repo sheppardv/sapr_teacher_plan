@@ -1,0 +1,11 @@
+Options +FollowSymLinks
+RewriteEngine On
+SetEnv TZ Europe/Kiev
+php_value date.timezone Europe/Kiev
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+DirectoryIndex index.php
+# otherwise forward it to index.php
+RewriteRule . index.php
