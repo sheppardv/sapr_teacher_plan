@@ -112,13 +112,10 @@ class SubjectController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Subject');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+    public function actionIndex()
+    {
+        $this->redirect('admin');
+    }
 
 	/**
 	 * Manages all models.
