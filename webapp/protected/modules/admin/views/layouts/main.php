@@ -43,8 +43,8 @@
                 array('label' => 'Activity', 'url' => array('activity/admin')),
                 array('label' => 'Teacher plan', 'url' => array('teacherPlan/admin')),
                 array('label' => 'Teacher reports', 'url' => array('teacherReport/admin')),
+                array('label' => 'Total report', 'url' => array('report/total')),
 
-//                array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                 array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('logout'), 'visible' => !Yii::app()->user->isGuest)
             ),
         )); ?>
