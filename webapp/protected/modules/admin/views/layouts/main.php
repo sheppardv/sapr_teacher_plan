@@ -1,4 +1,6 @@
 <?php /* @var $this Controller */ ?>
+<?php /* @var $content string */ ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -38,6 +40,7 @@
                 array('label' => 'Subject', 'url' => array('subject/admin')),
                 array('label' => 'Position', 'url' => array('position/admin')),
                 array('label' => 'Speciality', 'url' => array('speciality/admin')),
+                array('label' => 'Activity', 'url' => array('activity/admin')),
                 array('label' => 'Teacher plan', 'url' => array('teacherPlan/admin')),
                 array('label' => 'Teacher reports', 'url' => array('teacherReport/admin')),
 

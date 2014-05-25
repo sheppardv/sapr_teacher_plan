@@ -1,13 +1,13 @@
 <?php
-/* @var $this TeacherPlanController */
-/* @var $model TeacherPlan */
+/* @var $this TeacherReportController */
+/* @var $model TeacherReport */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
     <?php $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'teacher-plan-form',
+        'id' => 'teacher-report-form',
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
@@ -32,21 +32,39 @@
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'speciality_id'); ?>
-        <?php echo $form->dropDownList($model, 'speciality_id', CHtml::listData(Speciality::model()->findAll(), 'id', 'name')); ?>
-        <?php echo $form->error($model, 'speciality_id'); ?>
+        <?php echo $form->labelEx($model, 'dateActivity'); ?>
+        <!--        --><?php //echo $form->textField($model, 'dateActivity'); ?>
+
+        <?php
+        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+            'model' => $model,
+            'attribute' => 'dateActivity',
+//            'name'=>'datepicker-other-month',
+            'flat' => true, //remove to hide the datepicker
+            'options' => array(
+                'showAnim' => 'slide', //'slide','fold','slideDown','fadeIn','blind','bounce','clip','drop'
+                'showOtherMonths' => true, // Show Other month in jquery
+                'selectOtherMonths' => true, // Select Other month in jquery
+            ),
+            'htmlOptions' => array(
+                'style' => ''
+            ),
+        ));
+        ?>
+
+        <?php echo $form->error($model, 'dateActivity'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'topicName'); ?>
+        <?php echo $form->textField($model, 'topicName', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'topicName'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'activity_id'); ?>
         <?php echo $form->dropDownList($model, 'activity_id', CHtml::listData(Activity::model()->findAll(), 'id', 'name')); ?>
         <?php echo $form->error($model, 'activity_id'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'numberSemester'); ?>
-        <?php echo $form->dropDownList($model, 'numberSemester', array_combine([1, 2], [1, 2])); ?>
-        <?php echo $form->error($model, 'numberSemester'); ?>
     </div>
 
     <div class="row">

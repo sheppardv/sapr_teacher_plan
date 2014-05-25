@@ -1,24 +1,20 @@
 <?php
-/* @var $this TeacherPlanController */
-/* @var $model TeacherPlan */
+/* @var $this TeacherReportController */
+/* @var $model TeacherReport */
 
 $this->breadcrumbs = array(
-    'Teacher Plans' => array('admin'),
+    'Teacher Reports' => array('admin'),
     'Manage',
 );
 
 $this->menu = array(
-    array('label' => 'Create TeacherPlan', 'url' => array('create')),
+    array('label' => 'List TeacherReport', 'url' => array('admin')),
+    array('label' => 'Create TeacherReport', 'url' => array('create')),
 );
+
 ?>
 
-<style>
-    #page {
-        width: 1347px;
-    }
-</style>
-
-<h1>Manage Teacher Plans</h1>
+<h1>Manage Teacher Reports</h1>
 
 <p>
     You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -26,14 +22,14 @@ $this->menu = array(
     or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-    'id' => 'teacher-plan-grid',
+    'id' => 'teacher-report-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
         'id',
-
+        'dateActivity',
+        'topicName',
         [
             'name'=>'teacher_search',
             'value'=>'$data->teacher->fullName'
@@ -45,19 +41,11 @@ $this->menu = array(
         ],
 
         [
-            'name'=>'speciality_search',
-            'value'=>'$data->speciality->name'
-        ],
-
-        [
             'name'=>'activity_search',
             'value'=>'$data->activity->name'
         ],
 
-        'numberSemester',
-
         'countHours',
-
         'changed_at',
         'created_at',
 

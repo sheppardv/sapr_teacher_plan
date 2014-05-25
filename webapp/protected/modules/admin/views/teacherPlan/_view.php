@@ -13,8 +13,8 @@
     <?php echo CHtml::encode($data->user_id); ?>
     <br/>
 
-    <b><?php echo CHtml::encode($data->getAttributeLabel('numberSemestr')); ?>:</b>
-    <?php echo CHtml::encode($data->numberSemestr); ?>
+    <b><?php echo CHtml::encode($data->getAttributeLabel('numberSemester')); ?>:</b>
+    <?php echo CHtml::encode($data->numberSemester); ?>
     <br/>
 
     <b><?php echo CHtml::encode($data->getAttributeLabel('subject_id')); ?>:</b>

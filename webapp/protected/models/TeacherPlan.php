@@ -6,32 +6,29 @@
  * The followings are the available columns in table 'teacherPlan':
  * @property integer $id
  * @property integer $user_id
- * @property integer $numberSemestr
+ * @property integer $numberSemester
  * @property integer $subject_id
  * @property integer $speciality_id
- * @property integer $numberSemester
- * @property integer $countLecture
- * @property integer $countPractic
- * @property integer $countLab
- * @property integer $countConsultation
- * @property integer $countDiploma
- * @property integer $countCoursework
- * @property integer $countZalick
- * @property integer $countExams
- * @property integer $countModulework
- * @property integer $countPostgraduate
- * @property integer $countPracticeLead
- * @property integer $countControlWork
- * @property integer $countCalculateWork
- * @property integer $countDEK
+ * @property integer $activity_id
+ * @property integer $countHours
  * @property string $changed_at
  * @property string $created_at
  *
  * @property string $teacher_search
+ *
+ * @property string $fullname
+ *
+ * @property User $teacher
+ * @property Activity $activity
+ * @property Subject $subject
+ * @property Speciality $speciality
  */
 class TeacherPlan extends CActiveRecord
 {
     public $teacher_search;
+    public $subject_search;
+    public $activity_search;
+    public $speciality_search;
 
     /**
      * @return string the associated database table name
@@ -49,14 +46,12 @@ class TeacherPlan extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_id, subject_id, speciality_id, numberSemester', 'required'),
-            array('user_id, numberSemestr, subject_id, speciality_id, numberSemester, countLecture, countPractic, countLab, countConsultation, countDiploma, countCoursework, countZalick, countExams, countModulework, countPostgraduate, countPracticeLead, countControlWork, countCalculateWork, countDEK', 'numerical', 'integerOnly' => true),
+            array('user_id, subject_id, speciality_id, activity_id, countHours, numberSemester', 'required'),
+            array('user_id, numberSemester, subject_id, speciality_id, numberSemester, countHours, activity_id', 'numerical', 'integerOnly' => true),
             array('changed_at, created_at', 'safe'),
-            // The following rule is used by search().
-            // @todo Please remove those attributes that should not be searched.
-            array('id, user_id, numberSemestr, subject_id, speciality_id, numberSemester, countLecture, countPractic, countLab, countConsultation,
-			countDiploma, countCoursework, countZalick, countExams, countModulework, countPostgraduate, countPracticeLead, countControlWork,
-			countCalculateWork, countDEK, changed_at, created_at, teacher_search', 'safe', 'on' => 'search'),
+
+            array('id, user_id, numberSemester, subject_id, speciality_id, activity_id, numberSemester, countHours, changed_at, created_at,
+             teacher_search, subject_search, activity_search, speciality_search', 'safe', 'on' => 'search'),
         );
     }
 
@@ -69,6 +64,9 @@ class TeacherPlan extends CActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'teacher' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'activity' => array(self::BELONGS_TO, 'Activity', 'activity_id'),
+            'subject' => array(self::BELONGS_TO, 'Subject', 'subject_id'),
+            'speciality' => array(self::BELONGS_TO, 'Speciality', 'speciality_id'),
         );
     }
 
@@ -91,24 +89,11 @@ class TeacherPlan extends CActiveRecord
         return array(
             'id' => 'ID',
             'user_id' => 'Teacher',
-            'numberSemestr' => 'Number Semestr',
+            'numberSemester' => 'Number Semestr',
             'subject_id' => 'Subject',
+            'activity_id' => 'Activity',
             'speciality_id' => 'Speciality',
-            'numberSemester' => 'Number Semester',
-            'countLecture' => 'Count Lecture',
-            'countPractic' => 'Count Practic',
-            'countLab' => 'Count Lab',
-            'countConsultation' => 'Count Consultation',
-            'countDiploma' => 'Count Diploma',
-            'countCoursework' => 'Count Coursework',
-            'countZalick' => 'Count Zalick',
-            'countExams' => 'Count Exams',
-            'countModulework' => 'Count Modulework',
-            'countPostgraduate' => 'Count Postgraduate',
-            'countPracticeLead' => 'Count Practice Lead',
-            'countControlWork' => 'Count Control Work',
-            'countCalculateWork' => 'Count Calculate Work',
-            'countDEK' => 'Count Dek',
+            'countHours' => 'Count hours',
             'changed_at' => 'Changed At',
             'created_at' => 'Created At',
         );
@@ -131,32 +116,22 @@ class TeacherPlan extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-        $criteria->with = ['teacher'];
+        $criteria->with = ['teacher', 'subject', 'activity', 'speciality'];
 
         $criteria->compare('id', $this->id);
         $criteria->compare('user_id', $this->user_id);
-        $criteria->compare('numberSemestr', $this->numberSemestr);
+        $criteria->compare('numberSemester', $this->numberSemester);
         $criteria->compare('subject_id', $this->subject_id);
         $criteria->compare('speciality_id', $this->speciality_id);
         $criteria->compare('numberSemester', $this->numberSemester);
-        $criteria->compare('countLecture', $this->countLecture);
-        $criteria->compare('countPractic', $this->countPractic);
-        $criteria->compare('countLab', $this->countLab);
-        $criteria->compare('countConsultation', $this->countConsultation);
-        $criteria->compare('countDiploma', $this->countDiploma);
-        $criteria->compare('countCoursework', $this->countCoursework);
-        $criteria->compare('countZalick', $this->countZalick);
-        $criteria->compare('countExams', $this->countExams);
-        $criteria->compare('countModulework', $this->countModulework);
-        $criteria->compare('countPostgraduate', $this->countPostgraduate);
-        $criteria->compare('countPracticeLead', $this->countPracticeLead);
-        $criteria->compare('countControlWork', $this->countControlWork);
-        $criteria->compare('countCalculateWork', $this->countCalculateWork);
-        $criteria->compare('countDEK', $this->countDEK);
+        $criteria->compare('countHours', $this->countHours);
         $criteria->compare('changed_at', $this->changed_at, true);
         $criteria->compare('created_at', $this->created_at, true);
 
         $criteria->compare('teacher.firstName', $this->teacher_search, true);
+        $criteria->compare('subject.name', $this->subject_search, true);
+        $criteria->compare('activity.name', $this->activity_search, true);
+        $criteria->compare('speciality.name', $this->speciality_search, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -166,6 +141,18 @@ class TeacherPlan extends CActiveRecord
                     'teacher_search' => array(
                         'asc' => 'teacher.firstName',
                         'desc' => 'teacher.firstName DESC',
+                    ),
+                    'subject_search' => array(
+                        'asc' => 'subject.name',
+                        'desc' => 'subject.name DESC',
+                    ),
+                    'activity_search' => array(
+                        'asc' => 'activity.name',
+                        'desc' => 'activity.name DESC',
+                    ),
+                    'speciality_search' => array(
+                        'asc' => 'speciality.name',
+                        'desc' => 'speciality.name DESC',
                     ),
                     '*',
                 ),

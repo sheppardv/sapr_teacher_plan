@@ -21,25 +21,30 @@ $this->menu = array(
     'data' => $model,
     'attributes' => array(
         'id',
-        'user_id',
-        'numberSemestr',
-        'subject_id',
-        'speciality_id',
+        [
+            'name' => 'user_id',
+            'value' => $model->teacher->fullname,
+        ],
+
         'numberSemester',
-        'countLecture',
-        'countPractic',
-        'countLab',
-        'countConsultation',
-        'countDiploma',
-        'countCoursework',
-        'countZalick',
-        'countExams',
-        'countModulework',
-        'countPostgraduate',
-        'countPracticeLead',
-        'countControlWork',
-        'countCalculateWork',
-        'countDEK',
+
+        [
+            'name' => 'subject_id',
+            'value' => $model->subject->name,
+        ],
+
+        [
+            'name' => 'speciality_id',
+            'value' => $model->speciality->name,
+        ],
+
+        [
+            'name' => 'activity_id',
+            'value' => $model->activity->name,
+        ],
+
+        'countHours',
+
         'changed_at',
         'created_at',
     ),

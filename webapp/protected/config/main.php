@@ -74,6 +74,19 @@ return array(
                 */
             ),
         ),
+        'widgetFactory' => array(
+            'widgets' => array(
+                'CJuiDatePicker' => array(
+                    'scriptFile' => 'jquery-ui.min.js',
+                    'language' => 'uk',
+                    'options' => array(
+                        'dateFormat' => 'yy.mm.dd',
+                        'showAnim' => 'fold',
+                        'fontSize' => '0.85em',
+                    ),
+                ),
+            ),
+        ),
     ),
 
     // application-level parameters that can be accessed
