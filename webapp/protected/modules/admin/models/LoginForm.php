@@ -43,7 +43,7 @@ class LoginForm extends CFormModel
     public function authenticate($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $this->_identity = new UserIdentity($this->email, $this->password);
+            $this->_identity = new UserIdentity($this->email, $this->password, true);
             if (!$this->_identity->authenticate()) {
                 switch ($this->_identity->errorCode) {
                     case UserIdentity::ERROR_USERNAME_INVALID:
@@ -57,7 +57,6 @@ class LoginForm extends CFormModel
                         break;
                 }
             }
-
         }
     }
 

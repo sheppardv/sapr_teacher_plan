@@ -33,6 +33,11 @@ $this->menu = array(
         'lastName',
         'fatherName',
 
+        [
+            'name' => 'position_search',
+            'value' => '$data->position->name'
+        ],
+
         'status',
         'type',
         'last_visited_at',

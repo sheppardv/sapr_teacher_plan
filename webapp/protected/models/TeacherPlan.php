@@ -108,15 +108,21 @@ class TeacherPlan extends CActiveRecord
      * models according to data in model fields.
      * - Pass data provider to CGridView, CListView or any similar widget.
      *
+     * @param bool $onlyMine
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search()
+    public function search($onlyMine = false)
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
         $criteria->with = ['teacher', 'subject', 'activity', 'speciality'];
+
+        if($onlyMine){
+            $criteria->addCondition('t.user_id = :user_id');
+            $criteria-> params['user_id'] = Yii::app()->user->id;
+        }
 
         $criteria->compare('id', $this->id);
         $criteria->compare('user_id', $this->user_id);

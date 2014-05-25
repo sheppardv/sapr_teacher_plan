@@ -21,6 +21,8 @@
  *
  * @property Activity $activity
  * @property Subject $subject
+ *
+ * @method TeacherReport findByPk()
  */
 class TeacherReport extends CActiveRecord
 {
@@ -52,7 +54,7 @@ class TeacherReport extends CActiveRecord
 
             ['activity_id', 'limitHours'],
 
-            array('id, user_id, subject_id, dateActivity, topicName, countHours, changed_at, created_at, teacher_search, subject_searchm activity_search', 'safe', 'on' => 'search'),
+            array('id, user_id, subject_id, dateActivity, topicName, countHours, changed_at, created_at, teacher_search, subject_search, activity_search', 'safe', 'on' => 'search'),
         );
     }
 
@@ -154,13 +156,19 @@ class TeacherReport extends CActiveRecord
      * models according to data in model fields.
      * - Pass data provider to CGridView, CListView or any similar widget.
      *
+     * @param bool $onlyMine
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search()
+    public function search($onlyMine = false)
     {
         $criteria = new CDbCriteria;
         $criteria->with = ['teacher', 'subject', 'activity',];
+
+        if($onlyMine){
+            $criteria->addCondition('t.user_id = :user_id');
+            $criteria-> params['user_id'] = Yii::app()->user->id;
+        }
 
         $criteria->compare('id', $this->id);
         $criteria->compare('user_id', $this->user_id);

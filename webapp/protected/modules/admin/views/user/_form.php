@@ -44,6 +44,12 @@
     </div>
 
     <div class="row">
+        <?php echo $form->labelEx($model, 'position_id'); ?>
+        <?php echo $form->dropDownList($model, 'position_id', CHtml::listData(Position::model()->findAll(), 'id', 'name')); ?>
+        <?php echo $form->error($model, 'position_id'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->labelEx($model, 'newPassword'); ?>
         <?php echo $form->passwordField($model, 'newPassword', array('size' => 60, 'maxlength' => 255)); ?>
         <?php echo $form->error($model, 'newPassword'); ?>

@@ -44,8 +44,8 @@
                 array('label' => 'Teacher plan', 'url' => array('teacherPlan/admin')),
                 array('label' => 'Teacher reports', 'url' => array('teacherReport/admin')),
 
-                array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+//                array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+                array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('logout'), 'visible' => !Yii::app()->user->isGuest)
             ),
         )); ?>
     </div>

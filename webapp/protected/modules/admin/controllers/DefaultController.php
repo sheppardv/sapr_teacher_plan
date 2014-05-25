@@ -30,6 +30,10 @@ class DefaultController extends BackendController
 
     public function actionIndex()
     {
+        if(!Yii::app()->user->isGuest){
+            $this->redirect(array("user/admin"));
+        }
+
         $loginForm = new LoginForm;
 
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
@@ -64,5 +68,11 @@ class DefaultController extends BackendController
         } else {
             echo 'Admin generated successfully';
         }
+    }
+
+    public function actionLogout()
+    {
+        Yii::app()->user->logout();
+        $this->redirect('index');
     }
 }
