@@ -8,6 +8,7 @@ $cs = Yii::app()->clientScript;
  * StyleSHeets
  */
 $cs
+    ->registerCssFile('/css/common.css')
     ->registerCssFile('/css/bootstrap3/css/bootstrap.css')
     ->registerCssFile('/css/bootstrap3/css/bootstrap-theme.css');
 

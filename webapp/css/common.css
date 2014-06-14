@@ -8,12 +8,16 @@
     text-align: center;
 }
 
-.footer-wrapper{
+#footer{
     box-sizing: border-box;
     display: block;
-    /*position: absolute;*/
-    /*bottom: 0;*/
+    position: absolute;
+    bottom: 0;
     margin-top: 20px;
     padding: 10px 10px;
     height: 50px;
+}
+
+body{
+    background-color: #0099ff;
 }

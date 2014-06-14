@@ -6,17 +6,11 @@
  */
 ?>
 
-<style>
-    table,th,td
-    {
-        border:1px solid black;
-        border-collapse:collapse;
-        text-align: justify;
-    }
-</style>
+
+<h1>Total report</h1>
 
 
-<table>
+<table class="table table-striped table-bordered table-hover table-condensed">
     <tr>
         <td>#</td>
         <td>Name</td>
