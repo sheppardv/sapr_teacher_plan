@@ -27,12 +27,17 @@ $this->menu = array(
 </p>
 
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.BsGridView', array(
     'id' => 'teacher-plan-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-        'id',
+        [
+            'name' => 'id',
+            'htmlOptions' => [
+                'class' => 'id-column'
+            ]
+        ],
 
         [
             'name'=>'teacher_search',
@@ -58,8 +63,18 @@ $this->menu = array(
 
         'countHours',
 
-        'changed_at',
-        'created_at',
+        [
+            'name' => 'changed_at',
+            'htmlOptions' => [
+                'class' => 'date-column'
+            ]
+        ],
+        [
+            'name' => 'created_at',
+            'htmlOptions' => [
+                'class' => 'date-column'
+            ]
+        ],
 
         array(
             'class' => 'CButtonColumn',

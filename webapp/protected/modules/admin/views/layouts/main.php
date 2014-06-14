@@ -8,6 +8,7 @@ $cs = Yii::app()->clientScript;
  * StyleSHeets
  */
 $cs
+    ->registerCssFile('/css/common.css')
     ->registerCssFile('/css/bootstrap3/css/bootstrap.css')
     ->registerCssFile('/css/bootstrap3/css/bootstrap-theme.css');
 
@@ -35,14 +36,6 @@ $cs
 </head>
 
 <body>
-<style>
-    .footer-wrapper {
-        position: relative;
-        height: 50px;
-        margin-top: 10px;
-        margin-left: 10px;
-    }
-</style>
 
 <div class="container" id="page">
 

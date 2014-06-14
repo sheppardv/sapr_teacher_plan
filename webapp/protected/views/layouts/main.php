@@ -36,15 +36,6 @@ $cs
 
 <body>
 
-<style>
-    .footer-wrapper {
-        position: relative;
-        height: 50px;
-        margin-top: 10px;
-        margin-left: 10px;
-    }
-</style>
-
 <div class="container" id="page">
 
     <?php
@@ -89,12 +80,11 @@ $cs
 
 </div>
 
-
-<div class="footer-wrapper">
-    <footer>
+<div id="footer">
+    <div class="container">
         Copyright &copy; <?php echo date('Y'); ?> by Ruslan Voronyak.<br/>
         All Rights Reserved.<br/>
-    </footer>
+    </div>
 </div>
 
 </body>
