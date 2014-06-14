@@ -50,9 +50,6 @@ class ReportController extends Controller
     {
         $model = new TeacherReport;
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
         if (isset($_POST['TeacherReport'])) {
             $model->attributes = $_POST['TeacherReport'];
             $model->user_id = Yii::app()->user->id;

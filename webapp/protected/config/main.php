@@ -9,14 +9,23 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'План роботи викладачів',
+//    'language' => 'uk',
 
     // preloading 'log' component
     'preload' => array('log'),
+
+    'aliases' => array(
+        'bootstrap' => 'ext.bootstrap',
+    ),
 
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
         'application.components.*',
+
+        'bootstrap.behaviors.*',
+        'bootstrap.helpers.*',
+        'bootstrap.widgets.*'
     ),
 
     'modules' => array(
@@ -24,6 +33,7 @@ return array(
             'class' => 'system.gii.GiiModule',
             'password' => '1',
             'ipFilters' => array('127.0.0.1', '10.*.*.*'),
+            'generatorPaths' => array('bootstrap.gii'),
         ),
 
         'admin' => [
@@ -86,6 +96,10 @@ return array(
                     ),
                 ),
             ),
+        ),
+
+        'bootstrap' => array(
+            'class' => 'bootstrap.components.BsApi'
         ),
     ),
 

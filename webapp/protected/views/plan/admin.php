@@ -17,7 +17,7 @@ $this->menu = array();
     or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.BsGridView', array(
     'id' => 'teacher-plan-grid',
     'dataProvider' => $model->search(true),
     'filter' => $model,
@@ -45,9 +45,5 @@ $this->menu = array();
 
         'changed_at',
         'created_at',
-
-        array(
-            'class' => 'CButtonColumn',
-        ),
     ),
 )); ?>

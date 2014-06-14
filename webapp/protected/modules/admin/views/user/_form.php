@@ -1,12 +1,12 @@
 <?php
 /* @var $this UserController */
 /* @var $model User */
-/* @var $form CActiveForm */
+/* @var $form BsActiveForm */
 ?>
 
-<div class="form">
+<div class="col-md-5">
 
-    <?php $form = $this->beginWidget('CActiveForm', array(
+    <?php $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
         'id' => 'user-form',
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
@@ -19,45 +19,29 @@
 
     <?php echo $form->errorSummary($model); ?>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'email'); ?>
-        <?php echo $form->textField($model, 'email', array('size' => 60, 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'email'); ?>
-    </div>
+    <?php echo $form->textFieldControlGroup($model, 'email', array('size' => 60, 'maxlength' => 255)); ?>
+    <?php echo $form->error($model, 'email'); ?>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'firstName'); ?>
-        <?php echo $form->textField($model, 'firstName', array('size' => 60, 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'firstName'); ?>
-    </div>
+    <?php echo $form->textFieldControlGroup($model, 'firstName', array('size' => 60, 'maxlength' => 255)); ?>
+    <?php echo $form->error($model, 'firstName'); ?>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'lastName'); ?>
-        <?php echo $form->textField($model, 'lastName', array('size' => 60, 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'lastName'); ?>
-    </div>
+    <?php echo $form->textFieldControlGroup($model, 'lastName', array('size' => 60, 'maxlength' => 255)); ?>
+    <?php echo $form->error($model, 'lastName'); ?>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'fatherName'); ?>
-        <?php echo $form->textField($model, 'fatherName', array('size' => 60, 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'fatherName'); ?>
-    </div>
+    <?php echo $form->textFieldControlGroup($model, 'fatherName', array('size' => 60, 'maxlength' => 255)); ?>
+    <?php echo $form->error($model, 'fatherName'); ?>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'position_id'); ?>
-        <?php echo $form->dropDownList($model, 'position_id', CHtml::listData(Position::model()->findAll(), 'id', 'name')); ?>
-        <?php echo $form->error($model, 'position_id'); ?>
-    </div>
+    <?php echo $form->dropDownListControlGroup($model, 'position_id', CHtml::listData(Position::model()->findAll(), 'id', 'name')); ?>
+    <?php echo $form->error($model, 'position_id'); ?>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'newPassword'); ?>
-        <?php echo $form->passwordField($model, 'newPassword', array('size' => 60, 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'newPassword'); ?>
-    </div>
+    <?php echo $form->passwordFieldControlGroup($model, 'newPassword', array('size' => 60, 'maxlength' => 255)); ?>
+    <?php echo $form->error($model, 'newPassword'); ?>
 
-    <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-    </div>
+    <?php
+    echo BsHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array(
+        'color' => BsHtml::BUTTON_COLOR_PRIMARY
+    ));
+    ?>
 
     <?php $this->endWidget(); ?>
 

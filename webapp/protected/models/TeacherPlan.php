@@ -22,6 +22,8 @@
  * @property Activity $activity
  * @property Subject $subject
  * @property Speciality $speciality
+ *
+ * @method TeacherPlan[] findAllByAttributes()
  */
 class TeacherPlan extends CActiveRecord
 {

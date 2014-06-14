@@ -5,7 +5,7 @@ class WebUser extends CWebUser {
     public function checkAccess($operation, $params = array(), $allowCaching = true)
     {
         $userModel = User::model()->findByPk(Yii::app()->user->id);
-        return $userModel->type == User::TYPE_ADMIN;
+        return $userModel and $userModel->type == User::TYPE_ADMIN;
 //        return parent::checkAccess($operation, $params, $allowCaching);
     }
 

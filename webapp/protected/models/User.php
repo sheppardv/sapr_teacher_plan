@@ -91,6 +91,7 @@ class User extends CActiveRecord
             'password' => 'Password',
             'status' => 'Status',
             'type' => 'Type',
+            'position_id' => 'Position',
             'created_at' => 'Created At',
             'changed_at' => 'Changed At',
             'last_visited_at' => 'Last Visited At',
