@@ -46,58 +46,83 @@ class PlanController extends Controller
     public function actionPlan()
     {
         $user_id = Yii::app()->user->id;
-        $teacherPlans = TeacherPlan::model()->together()->findAllByAttributes(['user_id' => $user_id]);
+
+        $teacherPlans = TeacherPlan::model()->with(['activity', 'speciality', 'subject'])->together()->findAllByAttributes(['user_id' => $user_id]);
 
         $data = [];
-        $tableHeaders = ['#', 'Назва дисципліни', 'Спец.', "К-ть."];
+        $tableHeaders = ['Назва дисципліни', 'Спец.', "К-ть."];
         $foundActivities = [];
+        $totalActivityHoursBySemesterAndSubject = [];
         $totalActivityHoursBySemester = [];
 
         foreach ($teacherPlans as $tp) {
-            $subject = $tp->subject;
-            $activities = Activity::model()->findAllBySql(<<<SQL
-SELECT a.* FROM teacherPlan tp
-JOIN activity a ON a.id = tp.activity_id
-WHERE tp.user_id = $user_id and tp.subject_id = {$tp->subject_id}
-SQL
-);
-
-            if (!isset($totalActivityHoursBySemester[$tp->numberSemester][$tp->subject->name])) {
-                $totalActivityHoursBySemester[$tp->numberSemester][$tp->subject->name] = 0;
+            if (!isset($totalActivityHoursBySemesterAndSubject[$tp->numberSemester][$tp->subject->name])) {
+                $totalActivityHoursBySemesterAndSubject[$tp->numberSemester][$tp->subject->name] = 0;
             }
+
+
+            if (!isset($totalActivityHoursBySemester[$tp->numberSemester][$tp->activity->name])) {
+                $totalActivityHoursBySemester[$tp->numberSemester][$tp->activity->name] = 0;
+            }
+
+            $totalActivityHoursBySemesterAndSubject[$tp->numberSemester][$tp->subject->name] += (int)$tp->countHours;
 
             if (!in_array($tp->activity->name, $tableHeaders)) {
                 $foundActivities[] = $tp->activity->name;
                 $tableHeaders[] = $tp->activity->name;
             }
-            $data[$tp->numberSemester][$tp->subject->name][$tp->speciality->name][$tp->activity->name] = (int)$tp->countHours;
-            $totalActivityHoursBySemester[$tp->numberSemester][$tp->subject->name] += (int)$tp->countHours;
+
+            if(isset($data[$tp->numberSemester][$tp->subject->name])){
+                $data[$tp->numberSemester][$tp->subject->name]['activities'][$tp->activity->name] = (int)$tp->countHours;
+
+            } else {
+                $row = [
+                    'speciality_name' => [
+                        $tp->speciality->name => $tp->speciality->countStudents
+                    ],
+                    'activities' => [
+                        $tp->activity->name => (int)$tp->countHours
+                    ],
+                ];
+
+                $data[$tp->numberSemester][$tp->subject->name] = $row;
+            }
+
+            $totalActivityHoursBySemester[$tp->numberSemester][$tp->activity->name] += (int)$tp->countHours;
         }
 
 
         $tableHeaders[] = 'Всього';
 
         $viewData = [];
-        foreach ($data as $semester => $subjects) {
-            $viewData[$semester] = [];
+        $viewData['headers'] = $tableHeaders;
+        foreach ($data as $numSemester => $semesterData) {
 
-            foreach ($subjects as $subjectName => $specialities) {
+            foreach ($semesterData as $subjectName => $subjectData) {
+                $row = [];
+                $row[] = $subjectName;
 
-                foreach ($specialities as $speciality => $activities) {
+                $row[] = array_keys($subjectData['speciality_name'])[0];
+                $row[] = array_values($subjectData['speciality_name'])[0];
 
-                    foreach ($activities as $activity => $countHours) {
-                        $viewData[$semester][$subjectName][$speciality][] = $countHours;
-
+                foreach ($foundActivities as $foundActivity ){
+                    if(isset($subjectData['activities'][$foundActivity])){
+                        $row[] = $subjectData['activities'][$foundActivity];
+                    } else {
+                        $row[] = 0;
                     }
                 }
+
+                $row[] = $totalActivityHoursBySemesterAndSubject[$numSemester][$subjectName];
+
+                $viewData['semesters'][$numSemester][] = $row;
             }
         }
 
 
-        $this->render('admin', array(
-            'data' => $data,
-            'tableHeaders' => $tableHeaders,
-            'foundActivities' => $foundActivities,
+        $this->render('plan', array(
+            'data' => $viewData,
+            'totalActivityHoursBySemester' => $totalActivityHoursBySemester,
         ));
     }
 

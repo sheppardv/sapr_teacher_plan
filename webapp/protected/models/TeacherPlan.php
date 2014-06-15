@@ -136,7 +136,7 @@ class TeacherPlan extends CActiveRecord
         $criteria->compare('changed_at', $this->changed_at, true);
         $criteria->compare('created_at', $this->created_at, true);
 
-        $criteria->compare('teacher.firstName', $this->teacher_search, true);
+        $criteria->compare('teacher.lastName', $this->teacher_search, true);
         $criteria->compare('subject.name', $this->subject_search, true);
         $criteria->compare('activity.name', $this->activity_search, true);
         $criteria->compare('speciality.name', $this->speciality_search, true);

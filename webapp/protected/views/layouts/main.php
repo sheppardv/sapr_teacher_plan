@@ -52,7 +52,7 @@ $cs
                 'items' => array(
                     array('label' => 'Home', 'url' => array('/site/index'), 'visible' => !Yii::app()->user->isGuest),
                     array('label' => 'Report', 'url' => array('/report'), 'visible' => !Yii::app()->user->isGuest),
-                    array('label' => 'Plan', 'url' => array('/plan'), 'visible' => !Yii::app()->user->isGuest),
+                    array('label' => 'Plan', 'url' => array('/plan/plan'), 'visible' => !Yii::app()->user->isGuest),
                     array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                     array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
                 )
@@ -80,6 +80,8 @@ $cs
     <?php echo $content; ?>
 
 </div>
+
+<div class="clearfix"></div>
 
 <div id="footer">
     <div class="container">

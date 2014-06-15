@@ -61,7 +61,7 @@ $cs
                     array('label' => 'Teacher reports', 'url' => array('teacherReport/admin'), 'visible' => Yii::app()->user->checkAccess('Admin')),
                     array('label' => 'Total report', 'url' => array('report/total'), 'visible' => Yii::app()->user->checkAccess('Admin')),
 
-                    array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('logout'), 'visible' => !Yii::app()->user->isGuest)
+                    array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('//site/logout'), 'visible' => !Yii::app()->user->isGuest)
                 )
             )
         )
@@ -88,11 +88,11 @@ $cs
 
 </div>
 
-<div class="footer-wrapper">
-    <footer>
+<div id="footer">
+    <div class="container">
         Copyright &copy; <?php echo date('Y'); ?> by Ruslan Voronyak.<br/>
         All Rights Reserved.<br/>
-    </footer>
+    </div>
 </div>
 
 </body>
